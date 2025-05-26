@@ -5,7 +5,7 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
-DEVICE_PATH := device/xiaomi/liuqin
+DEVICE_PATH := device/xiaomi/liuqin #设备树
 
 # For building with minimal manifest
 ALLOW_MISSING_DEPENDENCIES := true
@@ -90,14 +90,25 @@ PLATFORM_VERSION := 16.1.0
 
 # TWRP Configuration
 TW_THEME := portrait_hdpi
-TW_DEFAULT_LANGUAGE := zh_CN
-TW_SCREEN_BLANK_ON_BOOT := true
-TW_INPUT_BLACKLIST := "hbtp_vm"
-TW_USE_TOOLBOX := true
-TW_INCLUDE_REPACKTOOLS := true
-TW_INCLUDE_CRYPTO := true
-TW_INCLUDE_CRYPTO_FBE := true
-RECOVERY_SDCARD_ON_DATA := true
-BOARD_HAS_FLIPPED_SCREEN:= true
-TW_IGNORE_MISC_WIPE_DATA:= true
-TARGET_CRYPTFS_HW_PATH := vendor/qcom/opensource/commonsys/cryptfs_hw
+TW_EXTRA_LANGUAGES := true     #  添加更多国家的语言（包括亚洲语言）
+TW_DEFAULT_LANGUAGE := zh_CN     #  设置默认语言为简体中文
+BOARD_HAS_NO_REAL_SDCARD:= true    #  禁用sdcard分区之类的东西，如果TWRP不适合于您的Recovery分区，可能会节省一些空间。
+TW_NO_BATT_PERCENT:= true     #  在不支持电池信息的设备上禁用电池百分比显示
+TW_CUSTOM_POWER_BUTTON:= 107     #  自定义锁屏键所对应的设备按键
+#TW_NO_REBOOT_BOOTLOADER:= true     #  从 重启菜单中移除 reboot bootloader按钮
+#TW_NO_REBOOT_RECOVERY:= true     #  从 重启菜单中移除 reboot recovery按钮
+RECOVERY_TOUCHSCREEN_SWAP_XY:= true    #  在X轴和Y轴之间交换触摸映射
+#RECOVERY_TOUCHSCREEN_FLIP_Y:= true    #  翻转触摸y轴的值
+#RECOVERY_TOUCHSCREEN_FLIP_X:= true    #  翻转触摸x轴的值
+#TWRP_EVENT_LOGGING:= true    #  启用触摸事件日志记录来帮助调试触摸屏问题(不要在发布时留下这个选项，它会很快填满你的日志文件)
+BOARD_HAS_FLIPPED_SCREEN:= true    #  对于颠倒安装的屏幕，将屏幕上下翻（转示例机型：魅族Note5）
+TW_MAX_BRIGHTNESS := 255 # 设置最高亮度
+TW_DEFAULT_BRIGHTNESS := 155 # 设置默认亮度
+TW_IGNORE_MISC_WIPE_DATA := true # 是否在清除 data 时忽略 misc（来自fastboot，系统等的命令）
+TW_INCLUDE_CRYPTO := true #是否添加解密支持
+TW_INCLUDE_CRYPTO_FBE := true#是否添加解密支持[FBE]
+TARGET_CRYPTFS_HW_PATH := vendor/etc/fstab.qcom # 解密所需依赖的源码路径（高通机型）
+RECOVERY_SDCARD_ON_DATA := true # 设置内部存储的数据是否在 data 分区
+TW_USE_TOOLBOX := true # 是否使用 ToolBox
+TWRP_INCLUDE_LOGCAT := true # 是否启用 logcat
+TARGET_USES_LOGD := true # 是否启用 logcat
